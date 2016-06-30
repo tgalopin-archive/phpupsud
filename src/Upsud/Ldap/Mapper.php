@@ -41,11 +41,11 @@ class Mapper
         array_shift($groups);
 
         $user->groups = $groups;
-
-        if (in_array('student', $groups)) {
-            $user->isStudent = true;
-        } else {
+        
+        if (in_array('employee', $groups) || (in_array('researcher', $groups))) {
             $user->isStudent = false;
+        } else {
+            $user->isStudent = true;
         }
 
         // Departments
