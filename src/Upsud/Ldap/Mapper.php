@@ -42,10 +42,20 @@ class Mapper
 
         $user->groups = $groups;
         
-        if (in_array('employee', $groups) || (in_array('researcher', $groups))) {
-            $user->isStudent = false;
+        // User might be a student, but we can not be sure.
+        if (in_array('student', $groups)) {
+
+            if (in_array('employee', $groups) || (in_array('researcher', $groups))) {
+                // Doctorant
+                $user->isStudent = false;
+            } else {
+                // Student
+                $user->isStudent = true;
+            }
+
         } else {
-            $user->isStudent = true;
+            // Employee
+            $user->isStudent = false;
         }
 
         // Departments
